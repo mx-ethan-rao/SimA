@@ -1,0 +1,4 @@
+# Python caches/bytecode (works recursively)
+__pycache__/
+*.py[cod]
+*$py.class

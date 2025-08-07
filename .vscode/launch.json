@@ -1,0 +1,82 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: Current File",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "cwd": "/home/ethanrao/MIA_Diffusion/latent-diffusion",
+            "args": [
+                // "--unconditional"
+                // "--dataset=laion2",
+                // "--ckpt-path=/banana/ethan/MIA_data/POKEMON/sd-pokemon-base-env"
+                // "--pretrained_model_name_or_path=CompVis/stable-diffusion-v1-4",
+                // "--dataset_name=vikhyatk/coco-val",
+                // "--mia_split_file=/banana/ethan/MIA_data/MSCOCO/COCO2017VAL_train_ratio0.5.npz",
+                // "--dataset_split=validation",
+                // "--caption_column=captions",
+                // "--output_dir=/banana/ethan/MIA_data/MSCOCO/logs/sd-cocoval-finetuned",
+                // "--cache_dir=/banana/ethan/MIA_data/MSCOCO",
+                // "--train_batch_size=1",
+                // "--gradient_accumulation_steps=1",
+                // "--resolution=512",
+                // "--center_crop",
+                // "--random_flip",
+                // "--learning_rate=1e-5",
+                // "--lr_scheduler=constant",
+                // "--lr_warmup_steps=0",
+                // "--max_train_steps=15000",
+                // "--checkpointing_steps=500",
+                // "--seed=2025",
+                // "--mixed_precision=fp16",
+                // "--use_ema"
+            ],
+            "justMyCode": false
+        },
+        {
+            "name": "Python: attack",
+            "type": "python",
+            "request": "launch",
+            "program": "attack.py",
+            "console": "integratedTerminal",
+            "cwd": "/home/ethanrao/MIA_test/PIA/DDPM",
+            "args": [
+                "--checkpoint=/banana/ethan/MIA_data/CIFAR100/cifar100_ckpt.pt",
+                // "--checkpoint=/home/ethanrao/MIA_Diffusion/data/ckpt_cifar10.pt",
+                "--dataset_root=/banana/ethan/MIA_data",
+                "--dataset=CIFAR100",
+                "--img_size=32",
+                "--attacker=naive", 
+                "--attack_num=2",
+                "--interval=50",
+            ],
+            "justMyCode": false
+        },
+        {
+            "name": "Python: test",
+            "type": "python",
+            "request": "launch",
+            "program": "main.py",
+            "console": "integratedTerminal",
+            "cwd": "/home/ethanrao/deit",
+            "args": [
+                "--eval",
+                "--batch-size",
+                "512",
+                "--resume",
+                "/data/mingxing/imagenet-1k/deit/train_layer_noise_distilled_small/checkpoint39.pth",
+                "--model",
+                "deit_small_distilled_patch16_224",
+                "--data-path",
+                "/data/mingxing/imagenet-1k/data_ori"
+
+            ],
+            "justMyCode": false
+        }
+    ]
+}

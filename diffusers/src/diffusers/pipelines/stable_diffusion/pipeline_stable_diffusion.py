@@ -1298,7 +1298,7 @@ class StableDiffusionPipeline(
         # 3.  Determine which training-time steps to evaluate
         # ---------------------------------------------------------------------
         if timesteps is None:
-            timesteps = list(range(0, 200, 10))       # default 20-point schedule
+            timesteps = list(range(0, 300, 10))       # default 20-point schedule
         else:
             timesteps = list(timesteps)
 

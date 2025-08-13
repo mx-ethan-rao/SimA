@@ -91,24 +91,13 @@ python DDPM/attack.py \
 ### <a id="guided-diffusion-imagenet-1k"></a> Member/ Held-out: [ImageNet-1K](https://www.kaggle.com/datasets/sautkin/imagenet1k0)/ [ImageNetV2](https://github.com/modestyachts/ImageNetV2)
 #### Attack
 ```
-python guided-diffusion/INv2_attack.py \
-    --IMN1k /path/to/imagenet-1k/train \
-    --IMNv2 /path/to/IMAGENETv2/ImageNetV2-matched-frequency \
-    --ckpt_path /path/to/IMAGENET1K/256x256_diffusion_uncond.pt \
-    --cond=False \
-    --attacker SimA
+python guided-diffusion/INv2_attack.py --IMN1k /path/to/imagenet-1k/train --IMNv2 /path/to/IMAGENETv2/ImageNetV2-matched-frequency --ckpt_path /path/to/IMAGENET1K/256x256_diffusion_uncond.pt --cond=False --attacker SimA
 ```
 ## Latent Diffusion Model <a href="https://github.com/CompVis/latent-diffusion" title="View GitHub source">🔗</a>
 ### <a id="latent-diffusion-model-imagenet-1k"></a> Member/ Held-out: [ImageNet-1K](https://www.kaggle.com/datasets/sautkin/imagenet1k0)/ [ImageNetV2](https://github.com/modestyachts/ImageNetV2)
 #### Attack
 ```
-python latent-diffusion/INv2_attack.py \
-    --IMN1k /path/to/imagenet-1k/train \
-    --IMNv2 /path/to/IMAGENETv2/ImageNetV2-matched-frequency  \
-    --ckpt_path /path/to/imagenet1k_ldm.ckpt \
-    --config_path latent-diffusion/configs/latent-diffusion/cin256-v2.yaml \
-    --cond=False \
-    --attacker SimA
+python latent-diffusion/INv2_attack.py --IMN1k /path/to/imagenet-1k/train --IMNv2 /path/to/IMAGENETv2/ImageNetV2-matched-frequency  --ckpt_path /path/to/imagenet1k_ldm.ckpt --config_path latent-diffusion/configs/latent-diffusion/cin256-v2.yaml --cond=False --attacker SimA
 ```
 
 
@@ -137,6 +126,7 @@ accelerate launch diffusers/examples/text_to_image/train_text_to_image.py \
 ```
 #### Attack
 ```
+cd diffusers
 python -m src.mia.attack --attacker SimA --dataset pokemon --ckpt-path /path/to/POKEMON/logs/sd-pokemon-model/
 ```
 **--unconditional**: for unconditional attack
@@ -162,6 +152,7 @@ accelerate launch diffusers/examples/text_to_image/train_text_to_image.py \
 ```
 #### Attack
 ```
+cd diffusers
 python -m src.mia.attack --attacker SimA --dataset coco --ckpt-path /path/to/MSCOCO/logs/sd-mscoco-model/
 ```
 **--unconditional**: for unconditional attack
@@ -188,6 +179,7 @@ accelerate launch diffusers/examples/text_to_image/train_text_to_image.py \
 ```
 #### Attack
 ```
+cd diffusers
 python -m src.mia.attack --attacker SimA --dataset flickr --ckpt-path /path/to/FLICKR/logs/sd-flickr-model/
 ```
 **--unconditional**: for unconditional attack
@@ -199,6 +191,7 @@ python -m src.mia.attack --attacker SimA --dataset flickr --ckpt-path /path/to/F
 ### <a id="sd-v1-5-laion-aesthetics-v2-5-laion-2b-multitranslated"></a>Member/ Held-out: LAION-Aesthetics v2 5+ / LAION-2B-MultiTranslated
 #### Attack
 ```
+cd diffusers
 python -m src.mia.attack --attacker SimA --dataset laion-aesthetic_coco   --ckpt-path runwayml/stable-diffusion-v1-5 
 ```
 **--unconditional**: for unconditional attack
@@ -207,6 +200,7 @@ python -m src.mia.attack --attacker SimA --dataset laion-aesthetic_coco   --ckpt
 ### <a id="sd-v1-5-laion-aesthetics-v2-5-coco2017-val"></a>Member/ Held-out: LAION-Aesthetics v2 5+ / COCO2017-Val
 #### Attack
 ```
+cd diffusers
 python -m src.mia.attack --attacker SimA --dataset laion-aesthetic_laion-multitrans   --ckpt-path runwayml/stable-diffusion-v1-5
 ```
 **--unconditional**: for unconditional attack

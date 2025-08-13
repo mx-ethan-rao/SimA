@@ -1,5 +1,5 @@
 # Score-based Membership Inference on Diffusion Models
-[arXiv](https://arxiv.org/abs/2112.10752) | [BibTeX](#bibtex)
+[arXiv]() | [BibTeX](#bibtex)
 
 <p align="center">
 <img src=figures/plots_density_score.png />
@@ -218,25 +218,7 @@ python -m src.mia.attack --attacker SimA --dataset laion-aesthetic_laion-multitr
 ## BibTeX
 
 ```
-@misc{rombach2021highresolution,
-      title={High-Resolution Image Synthesis with Latent Diffusion Models}, 
-      author={Robin Rombach and Andreas Blattmann and Dominik Lorenz and Patrick Esser and Björn Ommer},
-      year={2021},
-      eprint={2112.10752},
-      archivePrefix={arXiv},
-      primaryClass={cs.CV}
-}
 
-@misc{https://doi.org/10.48550/arxiv.2204.11824,
-  doi = {10.48550/ARXIV.2204.11824},
-  url = {https://arxiv.org/abs/2204.11824},
-  author = {Blattmann, Andreas and Rombach, Robin and Oktay, Kaan and Ommer, Björn},
-  keywords = {Computer Vision and Pattern Recognition (cs.CV), FOS: Computer and information sciences, FOS: Computer and information sciences},
-  title = {Retrieval-Augmented Diffusion Models},
-  publisher = {arXiv},
-  year = {2022},  
-  copyright = {arXiv.org perpetual, non-exclusive license}
-}
 
 
 ```

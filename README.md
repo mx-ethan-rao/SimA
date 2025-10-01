@@ -1,5 +1,5 @@
 # Score-based Membership Inference on Diffusion Models
-[arXiv]() | [BibTeX](#bibtex)
+[arXiv](https://arxiv.org/pdf/2509.25003) | [BibTeX](#bibtex)
 
 <p align="center">
 <img src=figures/plots_density_score.png />
@@ -10,7 +10,7 @@ It provides the complete codebase for reproducing all experiments associated wit
 
 
 <p align="center">
-<img src=figures/MIA_main_v_2.png />
+<img src=figures/MIA_main.png />
 </p>
 
   

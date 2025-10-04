@@ -212,9 +212,12 @@ python -m src.mia.attack --attacker SimA --dataset laion-aesthetic_laion-multitr
 ## BibTeX
 
 ```
-
-
-
+@article{rao2025score,
+  title={Score-based Membership Inference on Diffusion Models},
+  author={Rao, Mingxing and Qu, Bowen and Moyer, Daniel},
+  journal={arXiv preprint arXiv:2509.25003},
+  year={2025}
+}
 ```
 
 

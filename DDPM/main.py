@@ -16,6 +16,8 @@ from tqdm import trange
 from dataset_utils import MIACelebA, MIACIFAR10, MIACIFAR100, MIASVHN, MIASTL10, MIAImageFolder
 from diffusion import GaussianDiffusionTrainer, GaussianDiffusionSampler
 from model import UNet
+from torch.utils.data import Subset
+
 
 
 FLAGS = flags.FLAGS
@@ -157,8 +159,9 @@ def get_dataset(FLAGS, only_member=False):
                                              (0.5, 0.5, 0.5))
         ])
         if only_member:
-            dataset = MIACelebA(member_idxs, root=os.path.join(dataset_root, 'CELEBA'), split='train',
-                                transform=transforms, download=False)
+            dataset = MIACelebA(root=os.path.join(dataset_root, 'CELEBA','celeba'), split="train", transform=transforms)
+            dataset = Subset(dataset, member_idxs)
+
         else:
             dataset = CelebA(root=os.path.join(dataset_root, 'CELEBA'), split='train',
                              transform=transforms, download=False)

@@ -100,6 +100,7 @@ attackers: Dict[str, Type[components.DDIMAttacker]] = {
     "SimA": components.SimA,
     "PFAMI": components.PFAMI,
     "Epsilon": components.Epsilon,
+    "SimA_MC": components.SimA_MC,
 }
 
 

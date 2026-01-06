@@ -8,6 +8,9 @@ import torchvision.datasets
 from torch.utils.data import Dataset
 from PIL import Image
 import numpy as np
+import pandas as pd
+from torch.utils.data import Subset
+
 
 # from measures import ssim
 # from score import fid
@@ -44,18 +47,31 @@ class MIASTL10(torchvision.datasets.STL10):
         return super(MIASTL10, self).__getitem__(item)
 
 
-class MIACelebA(torchvision.datasets.CelebA):
-
-    def __init__(self, idxs, **kwargs):
-        super(MIACelebA, self).__init__(**kwargs)
-        self.idxs = idxs
+class MIACelebA(Dataset):
+    def __init__(self, root, split="train", transform=None):
+        self.root = root
+        self.img_dir = os.path.join(root, "img_align_celeba")
+        self.attr = pd.read_csv(os.path.join(root, "list_attr_celeba.csv"))
+        self.part = pd.read_csv(os.path.join(root, "list_eval_partition.csv"))
+        self.transform = transform
+        split_map = {"train": 0, "valid": 1, "test": 2, "all": None}
+        split_idx = split_map[split]
+        if split_idx is not None:
+            ids = self.part[self.part["partition"] == split_idx]["image_id"]
+            self.attr = self.attr[self.attr["image_id"].isin(ids)]
+        self.files = self.attr["image_id"].tolist()
+        self.attrs = self.attr.drop(columns=["image_id"]).astype("int32").values
 
     def __len__(self):
-        return len(self.idxs)
+        return len(self.files)
 
-    def __getitem__(self, item):
-        item = self.idxs[item]
-        return super(MIACelebA, self).__getitem__(item)
+    def __getitem__(self, idx):
+        img_path = os.path.join(self.img_dir, self.files[idx])
+        img = Image.open(img_path).convert("RGB")
+        target = torch.tensor(self.attrs[idx])
+        if self.transform:
+            img = self.transform(img)
+        return img, target
 
 
 class MIASVHN(torchvision.datasets.SVHN):
@@ -180,10 +196,13 @@ def load_member_data(dataset_root, dataset_name, batch_size=128, shuffle=False, 
             torchvision.transforms.Resize(32),
             torchvision.transforms.ToTensor()
         ])
-        member_set = MIACelebA(member_idxs, root=os.path.join(dataset_root, 'CELEBA'), split='train',
-                               transform=transforms, download=False)
-        nonmember_set = MIACelebA(nonmember_idxs, root=os.path.join(dataset_root, 'CELEBA'), split='train',
-                                  transform=transforms, download=False)
+        # member_set = MIACelebA(member_idxs, root=os.path.join(dataset_root, 'CELEBA'), split='train',
+        #                        transform=transforms, download=False)
+        # nonmember_set = MIACelebA(nonmember_idxs, root=os.path.join(dataset_root, 'CELEBA'), split='train',
+        #                           transform=transforms, download=False)
+        datasets = MIACelebA(root=os.path.join(dataset_root, 'CELEBA','celeba'), split="train", transform=transforms)
+        member_set = Subset(datasets, member_idxs)
+        nonmember_set = Subset(datasets, nonmember_idxs)
     elif dataset_name.upper() == 'STL10':
         splits = np.load(os.path.join(dataset_root, 'STL10', 'STL10_train_ratio0.5.npz'))
         member_idxs = splits['mia_train_idxs']

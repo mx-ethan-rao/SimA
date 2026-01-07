@@ -125,6 +125,28 @@ class SimA(DDIMAttacker):
     def distance(self, x0, x1):
         return (x0.abs()**4).flatten(2).sum(dim=-1)
 
+class SimA_MC(DDIMAttacker):
+    def ddim_reverse(self, x0, condition=None):
+        intermediates = []
+        terminal_step = self.interval * self.attack_num
+        for step in range(0, terminal_step + self.interval, self.interval):
+            # eps = self.eps_getter(x0, condition, self.noise_level, step)
+            n_mc = 10
+            eps_accum = torch.randn_like(x0)
+            for _ in range(n_mc):
+                eps = torch.randn_like(x0)
+                eps_accum += self.eps_getter(self.get_xt(x0, step, eps), condition, step)
+            eps_accum = eps_accum / n_mc
+            intermediates.append(eps_accum)
+        return intermediates
+    
+    def ddim_denoise(self, x0, intermediates, condition):
+        # return dummy data
+        return [torch.zeros_like(x0)] * 2
+    
+    def distance(self, x0, x1):
+        return (x0.abs()**4).flatten(2).sum(dim=-1)
+
 
 class SecMI(DDIMAttacker):
     def ddim_reverse(self, x0, condition):

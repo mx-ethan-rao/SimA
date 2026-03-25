@@ -42,7 +42,7 @@ flags.DEFINE_string('IMNv2', '/banana/ethan/MIA_data/IMAGENETv2/ImageNetV2-match
 flags.DEFINE_string('ckpt_path', '/banana/ethan/MIA_data/IMAGENETv2/imagenet1k_ldm.ckpt',
                     'LDM checkpoint')
 flags.DEFINE_string('config_path',
-                    'configs/latent-diffusion/cin256-v2.yaml',
+                    '/home/ethanrao/MIA_Diffusion/latent-diffusion/configs/latent-diffusion/cin256-v2.yaml',
                     'YAML config that matches the checkpoint')
 flags.DEFINE_bool  ('cond', False,
                     'Class‑conditional (False → unconditional)')
@@ -98,6 +98,7 @@ attackers: Dict[str, Type[components.DDIMAttacker]] = {
     "SimA": components.SimA,
     "PFAMI": components.PFAMI,
     "Epsilon": components.Epsilon,
+    "SimA_MC":components.SimA_MC,
 }
 
 
@@ -158,6 +159,7 @@ def attack():
     # ---------- datasets ----------
     logger.info('Loading datasets …')
     tx = transforms.Compose([
+        transforms.Lambda(lambda img: img.convert("RGB")),
         transforms.Resize(FLAGS.image_size, transforms.InterpolationMode.BILINEAR),
         transforms.CenterCrop(FLAGS.image_size),
         transforms.ToTensor(),
@@ -203,10 +205,13 @@ def attack():
             cond_m = model.get_learned_conditioning({model.cond_stage_key: m_lbl})
             cond_h = model.get_learned_conditioning({model.cond_stage_key: h_lbl})
         else:
-            m_lbl = torch.arange(1000).to(DEVICE)
+            m_lbl = torch.tensor(m_img.shape[0]*[1000]).to(model.device)
             cond_m = model.get_learned_conditioning({model.cond_stage_key: m_lbl})
-            cond_m = cond_m.mean(0).unsqueeze(0).repeat(m_img.shape[0], 1, 1)
-            cond_h = cond_m
+            # m_lbl = torch.arange(1000).to(DEVICE)
+            # cond_m = model.get_learned_conditioning({model.cond_stage_key: m_lbl})
+            # cond_m = cond_m.mean(0).unsqueeze(0).repeat(m_img.shape[0], 1, 1)
+            h_lbl = torch.tensor(h_img.shape[0]*[1000]).to(model.device)
+            cond_h = model.get_learned_conditioning({model.cond_stage_key: h_lbl})
 
         members.append(attacker(m_z, condition=cond_m))
         nonmembers.append(attacker(h_z, condition=cond_h))

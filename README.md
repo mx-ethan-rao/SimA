@@ -37,7 +37,7 @@ Please refer to **README.md** of different model sub-folders.
 All the experiment scripts can be found in [script.sh](https://github.com/username/repo/blob/main/scripts/run_experiment.sh). For all experiments, please choose ``--attacker`` in ``[SimA, SecMi, PIA, PFAMI, Loss]``
 
 ## DDPM <a href="https://github.com/w86763777/pytorch-ddpm" title="View GitHub source">🔗</a>
-Please download all dataset splits and checkpoints [here]().
+Please download all dataset splits and checkpoints [here](https://drive.google.com/drive/folders/1542yOGotcLwpXy--aJjA-W-ddub_e-Ew?usp=sharing).
 ### <a id="ddpm-cifar-10"></a>CIFAR-10
 #### Train
 ```
@@ -206,7 +206,10 @@ python -m src.mia.attack --attacker SimA --dataset laion-aesthetic_laion-multitr
 **--unconditional**: for unconditional attack
 
 
+## Remarks
+### With all checkpoints and data splits([here](https://drive.google.com/drive/folders/1542yOGotcLwpXy--aJjA-W-ddub_e-Ew?usp=sharing)), you should be able to reproduce all the results reported in the paper. 
 
+### Please email Mingxing ([mingxing.rao@vanderbilt.edu](mailto:mingxing.rao@vanderbilt.edu)) if you have additional questions for reproduction.
 
 
 ## BibTeX

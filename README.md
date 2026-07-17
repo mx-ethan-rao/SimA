@@ -1,17 +1,19 @@
-# Score-based Membership Inference on Diffusion Models
-[arXiv](https://arxiv.org/pdf/2509.25003) | [BibTeX](#bibtex)
+<div align="center">
+<h1>Score-based Membership Inference on Diffusion Models (TMLR)</h1>
 
-<p align="center">
-<img src=figures/plots_density_score.png />
-</p>
+<a href="https://arxiv.org/pdf/2509.25003"><img src="https://img.shields.io/badge/arXiv-2503.11651-b31b1b" alt="arXiv"></a>
 
-This repository contains the **official implementation** of the paper *"Score-based Membership Inference on Diffusion Models?"*.  
-It provides the complete codebase for reproducing all experiments associated with the proposed **Simple Attack (SimA)** method.
+**[VINE Lab, Vanderbilt University](https://vine-lab.notion.site/)**
+
+[Mingxing (Ethan) Rao](https://mx-ethan-rao.github.io/), [Bowen Qu](https://www.linkedin.com/in/bowen-qu-b852b724a/), [Daniel Moyer](https://dcmoyer.github.io/)
+</div>
 
 
 <p align="center">
 <img src=figures/MIA_main.png />
 </p>
+
+Membership inference attacks (MIAs) against Diffusion Models (DMs) raise pressing privacy concerns by revealing whether a sample was part of the training set. While existing methods typically rely on measuring reconstruction error across multiple denoising steps as a test statistic, they often incur significant computational overhead. In this work, we present a simple yet successful attack statistic using only the predicted noise vectors from the DM’s denoiser, or equivalently, the score. Specifically, we show that the expected denoiser output points toward a kernel-weighted local mean of nearby training samples, such that its norm encodes proximity to the training set and thereby reveals membership. Building on this observation, we propose SimA, a single-query attack that provides a principled, efficient alternative to existing multi-query methods. SimA consistently achieves superior performance across variants of DMs and the Latent Diffusion Models (LDMs) on eight different datasets. Its Monte Carlo variant (SimA-MC) exhibits state-of-the-art performance across all experiments, significantly outperforming baseline methods in terms of TPR@1%FPR. These results demonstrate that complex reconstruction trajectories are unnecessary for effective membership inference, establishing SimA as a highly efficient benchmark for auditing privacy in DMs and LDMs.
 
   
 ## Requirements

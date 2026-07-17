@@ -37,7 +37,7 @@ Please refer to **README.md** of different model sub-folders.
 All the experiment scripts can be found in [script.sh](https://github.com/username/repo/blob/main/scripts/run_experiment.sh). For all experiments, please choose ``--attacker`` in ``[SimA, SecMi, PIA, PFAMI, Loss]``
 
 ## DDPM <a href="https://github.com/w86763777/pytorch-ddpm" title="View GitHub source">🔗</a>
-Please download all dataset splits and checkpoints [here](https://drive.google.com/drive/folders/1542yOGotcLwpXy--aJjA-W-ddub_e-Ew?usp=sharing).
+Please download partial dataset splits and checkpoints [here](https://drive.google.com/drive/folders/1542yOGotcLwpXy--aJjA-W-ddub_e-Ew?usp=sharing) for DDPM. For LDM and Stable Diffusion, we used the resutls from [this paper](https://openaccess.thecvf.com/content/CVPR2026/html/Rao_Latent_Diffusion_Inversion_Requires_Understanding_the_Latent_Space_CVPR_2026_paper.html) and the experiment is [here](https://github.com/mx-ethan-rao/VAE2Diffusion).
 ### <a id="ddpm-cifar-10"></a>CIFAR-10
 #### Train
 ```
